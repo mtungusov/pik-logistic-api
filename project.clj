@@ -18,7 +18,8 @@
                  [ring/ring-core "1.6.2"]
                  [http-kit "2.2.0"]
                  [metosin/ring-http-response "0.9.0"]
-                 [ring-middleware-format "0.7.2"]]
+                 [ring-middleware-format "0.7.2"]
+                 [compojure "1.6.0"]]
   :main pik-logistic-api.core
   :profiles {:uberjar {:omit-source true
                        :aot :all

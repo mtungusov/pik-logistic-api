@@ -1,16 +1,15 @@
 (ns pik-logistic-api.core
   (:require [clojure.tools.logging :as log]
             [mount.core :as mount]
-            [pik-logistic-api.config :refer [settings]]
             [org.httpkit.server :refer [run-server]]
-            [ring.util.http-response :as response]
-            [ring.middleware.format :refer [wrap-restful-format]])
+            [pik-logistic-api.config :refer [settings]]
+            [pik-logistic-api.handler :as handler])
   (:gen-class))
 
 (defonce state (atom {}))
 
 (defn init [args]
-  (log/info "PIK logistic API starting...")
+  (log/info "PIK logistic API Server starting...")
   (swap! state assoc :running true)
   (mount/start #'settings))
 
@@ -19,23 +18,15 @@
   (log/info "Stopping...")
   (when-let [server (:server @state)]
     (server :timeout 1000)
-    (log/info "Httpkit stopped"))
+    (log/info "HTTP Kit stopped"))
   (shutdown-agents)
   (Thread/sleep 1000)
   (log/info "Stopped!"))
 
-(defn handler [req]
-  (response/ok {:result {:status :ok}}))
-
-(defn wrap-formats [handler]
-  (wrap-restful-format
-    handler
-    {:formats [:json-kw :transit-json]}))
-
 (defn start-server []
   (let [port (get-in settings [:server :port])]
-    (swap! state assoc :server (run-server (-> #'handler wrap-formats) {:port port}))
-    (log/info "Httpkit started. Listen at :" port)))
+    (swap! state assoc :server (run-server (handler/app) {:port port}))
+    (log/info "HTTP Kit started. Listen at :" port)))
 
 
 (defn -main [& args]
