@@ -19,7 +19,10 @@
                  [http-kit "2.2.0"]
                  [metosin/ring-http-response "0.9.0"]
                  [ring-middleware-format "0.7.2"]
-                 [compojure "1.6.0"]]
+                 [cheshire "5.8.0"]
+                 [compojure "1.6.0"]
+                 [prismatic/schema "1.1.7"]
+                 [metosin/compojure-api "1.1.11"]]
   :main pik-logistic-api.core
   :profiles {:uberjar {:omit-source true
                        :aot :all
