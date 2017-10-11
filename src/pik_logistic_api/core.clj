@@ -2,8 +2,9 @@
   (:require [clojure.tools.logging :as log]
             [mount.core :as mount]
             [org.httpkit.server :refer [run-server]]
+            [pik-logistic-api.handler :as handler]
             [pik-logistic-api.config :refer [settings]]
-            [pik-logistic-api.handler :as handler])
+            [pik-logistic-api.db.core :refer [db]])
   (:gen-class))
 
 (defonce state (atom {}))
@@ -11,7 +12,7 @@
 (defn init [args]
   (log/info "PIK logistic API Server starting...")
   (swap! state assoc :running true)
-  (mount/start #'settings))
+  (mount/start #'settings #'db))
 
 (defn stop []
   (swap! state assoc :running false)

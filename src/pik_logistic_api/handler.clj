@@ -2,10 +2,12 @@
   (:require [clojure.tools.logging :as log]
             [ring.util.http-response :as response]
             [ring.middleware.format :refer [wrap-restful-format]]
+            [ring.logger :as logger]
             [compojure.core :refer [wrap-routes]]
             [compojure.route]
             [compojure.api.sweet :refer :all]
-            [pik-logistic-api.routes.home :refer [home-routes]]))
+            [pik-logistic-api.routes.home :refer [home-routes]]
+            [pik-logistic-api.routes.queries :refer [query-routes]]))
 
 ;(defn wrap-formats [handler]
 ;  (wrap-restful-format
@@ -30,9 +32,11 @@
 (def api-routes
   (api
     (context "/api/v2" []
-      #'home-routes)
+      #'home-routes
+      (context "/q" []
+        #'query-routes))
     (undocumented
       (compojure.route/not-found
         (response/not-found "page not found")))))
 
-(defn app [] (wrap-internal-error #'api-routes))
+(defn app [] (logger/wrap-with-logger (wrap-internal-error #'api-routes)))
