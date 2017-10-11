@@ -16,6 +16,7 @@
 ;(first (q/get-trackers-info db "2017-10-05 00:00:00"))
 
 (defn get-trackers-info []
-  (q/get-trackers-info db "2017-10-05 00:00:00"))
+  (q/get-trackers-info db))
+  ;(q/get-trackers-info db "2017-10-05 00:00:00"))
 
 ;(get-trackers-info)
