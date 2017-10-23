@@ -2,6 +2,7 @@
   (:require [clojure.tools.logging :as log]
             [ring.util.http-response :as response]
             [ring.middleware.format :refer [wrap-restful-format]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [ring.logger :as logger]
             [compojure.core :refer [wrap-routes]]
             [compojure.route]
@@ -22,6 +23,12 @@
         (log/error t)
         (response/internal-server-error "Something very bad has happened!")))))
 
+(defn wrap-my-cors [handler]
+  (wrap-cors handler
+             :access-control-allow-origin [#".*"]
+             :access-control-allow-methods #{:get}
+             :access-control-allow-credentials true))
+
 ;(def app-routes
 ;  (routes
 ;    (-> #'home-routes
@@ -39,4 +46,4 @@
       (compojure.route/not-found
         (response/not-found "page not found")))))
 
-(defn app [] (logger/wrap-with-logger (wrap-internal-error #'api-routes)))
+(defn app [] (logger/wrap-with-logger (wrap-my-cors (wrap-internal-error #'api-routes))))

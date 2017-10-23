@@ -20,6 +20,7 @@
                  [metosin/ring-http-response "0.9.0"]
                  [ring-middleware-format "0.7.2"]
                  [ring-logger "0.7.7"]
+                 [ring-cors "0.1.11"]
                  [cheshire "5.8.0"]
                  [compojure "1.6.0"]
                  [prismatic/schema "1.1.7"]
