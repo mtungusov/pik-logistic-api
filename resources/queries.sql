@@ -1,7 +1,8 @@
 -- :name trackers-info :? :*
-SELECT id, label, group_title,
+SELECT id, label, 
   status_movement, status_connection,
   event, event_time,
+  group_id, group_title,
   zone_id, zone_parent_id, zone_label,
   zone_label_current, zone_label_prev, last_parent_inzone_time
 FROM trackers_info
