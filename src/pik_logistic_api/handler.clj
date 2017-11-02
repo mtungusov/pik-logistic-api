@@ -38,7 +38,7 @@
 
 (def api-routes
   (api
-    (context "/api/v2" []
+    (context "/api/v3" []
       #'home-routes
       (context "/q" []
         #'query-routes))
