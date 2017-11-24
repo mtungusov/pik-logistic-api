@@ -8,7 +8,8 @@
             [compojure.route]
             [compojure.api.sweet :refer :all]
             [pik-logistic-api.routes.home :refer [home-routes]]
-            [pik-logistic-api.routes.queries :refer [query-routes]]))
+            [pik-logistic-api.routes.v3.queries :as v3]
+            [pik-logistic-api.routes.v4.queries :as v4]))
 
 ;(defn wrap-formats [handler]
 ;  (wrap-restful-format
@@ -41,7 +42,11 @@
     (context "/api/v3" []
       #'home-routes
       (context "/q" []
-        #'query-routes))
+        #'v3/query-routes))
+    (context "/api/v4" []
+      #'home-routes
+      (context "/q" []
+        #'v4/query-routes))
     (undocumented
       (compojure.route/not-found
         (response/not-found "page not found")))))

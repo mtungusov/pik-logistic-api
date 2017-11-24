@@ -12,7 +12,8 @@
 (defn init [args]
   (log/info "PIK logistic API Server starting...")
   (swap! state assoc :running true)
-  (mount/start #'settings #'db))
+  (mount/start))
+  ;(mount/start #'settings #'db))
 
 (defn stop []
   (swap! state assoc :running false)

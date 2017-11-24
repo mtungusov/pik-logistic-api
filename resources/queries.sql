@@ -13,3 +13,15 @@ ORDER BY (CASE
           WHEN event = 'outzone' AND zone_parent_id IS NULL THEN 2
           ELSE 3
           END ), zone_label_current, event_time
+
+
+-- :name trackers-info-by-etl :? :*
+SELECT tracker_id, tracker_label, group_title, zone_label_in, time_in, zone_label_out, time_out,
+  movement_status, connection_status, gps_updated
+FROM trackers_info_by_etl
+
+-- :name groups :? :*
+SELECT title FROM groups WHERE live = 1
+
+-- :name zones :? :*
+SELECT label FROM zones WHERE live = 1

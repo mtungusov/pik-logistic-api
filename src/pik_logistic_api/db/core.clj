@@ -20,3 +20,21 @@
   ;(q/get-trackers-info db "2017-10-05 00:00:00"))
 
 ;(get-trackers-info)
+
+
+(defn get-trackers-info-by-etl []
+  (q/trackers-info-by-etl db))
+
+;(get-trackers-info-by-etl)
+
+
+(defn get-groups []
+  (sort (map :title (q/groups db))))
+
+;(get-groups)
+
+
+(defn get-zones []
+  (sort (map :label (q/zones db))))
+
+;(get-zones)
