@@ -1,7 +1,18 @@
 (ns pik-logistic-api.db.core
   (:require [mount.core :refer [defstate]]
-            [pik-logistic-api.config :refer [settings]]
+            [clj-time.core :as t]
+            [clj-time.format :as tf]
+            [clj-time.coerce :as tc]
+            [pik-logistic-api.config :refer [navyxy-time-format settings]]
             [pik-logistic-api.db.queries :as q]))
+
+(def local-tz (t/time-zone-for-id (get-in settings [:local-tz])))
+
+(def my-time-formatter (tf/formatter navyxy-time-format local-tz))
+
+;(def t1 (tf/parse my-time-formater "2017-11-27 11:53:00"))
+;(tc/to-long t1)
+
 
 (defstate db
           :start
@@ -11,30 +22,34 @@
            :password (get-in settings [:sql :password])
            :domain (get-in settings [:sql :domain])})
 
-;(identity db)
-
-;(first (q/get-trackers-info db "2017-10-05 00:00:00"))
 
 (defn get-trackers-info []
   (q/get-trackers-info db))
-  ;(q/get-trackers-info db "2017-10-05 00:00:00"))
 
 ;(get-trackers-info)
 
+(defn- time-to-utc [time-str]
+  (tc/to-long (tf/parse my-time-formatter time-str)))
+
+(defn- format-tracker-info [item]
+  (cond-> item
+    (:time_out item) (assoc :time_out (time-to-utc (:time_out item)))
+    (:time_in item) (assoc :time_in (time-to-utc (:time_in item)))
+    (:gps_updated item) (assoc :gps_updated (time-to-utc (:gps_updated item)))))
 
 (defn get-trackers-info-by-etl []
-  (q/trackers-info-by-etl db))
+  (map format-tracker-info (q/trackers-info-by-etl db)))
 
 ;(get-trackers-info-by-etl)
 
 
 (defn get-groups []
-  (sort (map :title (q/groups db))))
+  (map :title (q/groups db)))
 
 ;(get-groups)
 
 
 (defn get-zones []
-  (sort (map :label (q/zones db))))
+  (map :label (q/zones db)))
 
 ;(get-zones)

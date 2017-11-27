@@ -25,7 +25,7 @@
                  [compojure "1.6.0"]
                  [prismatic/schema "1.1.7"]
                  [metosin/compojure-api "1.1.11"]
-                 [clj-time "0.14.0"]]
+                 [clj-time "0.14.2"]]
   :main pik-logistic-api.core
   :profiles {:uberjar {:omit-source true
                        :aot :all
