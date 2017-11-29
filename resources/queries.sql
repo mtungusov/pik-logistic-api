@@ -19,6 +19,8 @@ ORDER BY (CASE
 SELECT tracker_id, tracker_label, group_title, zone_label_in, time_in, zone_label_out, time_out,
   movement_status, connection_status, gps_updated
 FROM trackers_info_by_etl
+WHERE datediff(day, gps_updated, getdate()) < 10
+
 
 -- :name groups :? :*
 SELECT title FROM groups WHERE live = 1
