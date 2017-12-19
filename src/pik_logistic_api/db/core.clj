@@ -10,7 +10,7 @@
 
 (def my-time-formatter (tf/formatter navyxy-time-format local-tz))
 
-;(def t1 (tf/parse my-time-formater "2017-11-27 11:53:00"))
+;(def t1 (tf/parse my-time-formatter "2017-11-27 11:53:00"))
 ;(tc/to-long t1)
 
 
@@ -21,12 +21,6 @@
            :user (get-in settings [:sql :user])
            :password (get-in settings [:sql :password])
            :domain (get-in settings [:sql :domain])})
-
-
-;(defn get-trackers-info []
-;  (q/get-trackers-info db))
-
-;(get-trackers-info)
 
 
 (defn- time-to-utc [time-str]
