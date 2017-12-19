@@ -4,6 +4,7 @@
             ;[clj-time.format :as tf]))
 
 (hugsql/def-db-fns "queries.sql")
+;(hugsql/def-sqlvec-fns "queries.sql")
 
 ;(def navyixy-time-formatter (tf/formatter "yyyy-MM-dd HH:mm:ss"))
 ;(def one-day (t/days 1))

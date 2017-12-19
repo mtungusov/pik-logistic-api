@@ -50,3 +50,11 @@
   (map :label (q/zones db)))
 
 ;(get-zones)
+
+;(def q1 {:date_from "2017-01-01" :date_to "2017-11-30"
+;         :zones ["480 КЖИ - погр." "ДСК-Град - погр."]
+;         :groups ["Борт 12т.-20т." "-Инлоудер"]})
+
+;(q/idle-by-geo db q1)
+;(q/idle-by-group db q1)
+;(q/idle-by-geo-and-group db q1)
