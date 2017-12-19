@@ -12,11 +12,11 @@
                                                     javax.jms/jms
                                                     com.sun.jmdk/jmxtools
                                                     com.sun.jmx/jmxri]]
+                 [http-kit "2.2.0"]
                  [com.layerware/hugsql "0.4.8"]
                  [org.clojure/java.jdbc "0.7.4"]
                  [net.sourceforge.jtds/jtds "1.3.1"]
                  [ring/ring-core "1.6.3"]
-                 [http-kit "2.2.0"]
                  [metosin/ring-http-response "0.9.0"]
                  [ring-middleware-format "0.7.2"]
                  [ring-logger "0.7.7"]

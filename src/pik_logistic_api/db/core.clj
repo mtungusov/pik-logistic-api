@@ -23,19 +23,22 @@
            :domain (get-in settings [:sql :domain])})
 
 
-(defn get-trackers-info []
-  (q/get-trackers-info db))
+;(defn get-trackers-info []
+;  (q/get-trackers-info db))
 
 ;(get-trackers-info)
 
+
 (defn- time-to-utc [time-str]
   (tc/to-long (tf/parse my-time-formatter time-str)))
+
 
 (defn- format-tracker-info [item]
   (cond-> item
     (:time_out item) (assoc :time_out (time-to-utc (:time_out item)))
     (:time_in item) (assoc :time_in (time-to-utc (:time_in item)))
     (:gps_updated item) (assoc :gps_updated (time-to-utc (:gps_updated item)))))
+
 
 (defn get-trackers-info-by-etl []
   (map format-tracker-info (q/trackers-info-by-etl db)))
