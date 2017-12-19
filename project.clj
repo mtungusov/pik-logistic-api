@@ -3,7 +3,7 @@
   :url ""
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [mount "0.1.11"]
                  [cprop "0.1.11"]
                  [org.clojure/tools.logging "0.4.0"]
@@ -12,10 +12,10 @@
                                                     javax.jms/jms
                                                     com.sun.jmdk/jmxtools
                                                     com.sun.jmx/jmxri]]
-                 [com.layerware/hugsql "0.4.7"]
-                 [org.clojure/java.jdbc "0.7.0"]
+                 [com.layerware/hugsql "0.4.8"]
+                 [org.clojure/java.jdbc "0.7.4"]
                  [net.sourceforge.jtds/jtds "1.3.1"]
-                 [ring/ring-core "1.6.2"]
+                 [ring/ring-core "1.6.3"]
                  [http-kit "2.2.0"]
                  [metosin/ring-http-response "0.9.0"]
                  [ring-middleware-format "0.7.2"]
