@@ -58,3 +58,15 @@
 ;(q/idle-by-geo db q1)
 ;(q/idle-by-group db q1)
 ;(q/idle-by-geo-and-group db q1)
+
+
+(defn get-idle-by-geo [params]
+  (q/idle-by-geo db params))
+
+
+(defn get-idle-by-group [params]
+  (q/idle-by-group db params))
+
+
+(defn get-idle-by-geo-and-group [params]
+  (q/idle-by-geo-and-group db params))
